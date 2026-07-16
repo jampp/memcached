@@ -1,8 +1,8 @@
 ---
 
 - name: Install the memcached packages
-  yum:
-    name: "{{item}}"
+  action:
+    module: "{{ (ansible_distribution_major_version == '2023') | ternary('dnf', 'yum') }}"
     state: present
   with_items: "{{memcached_redhat_pkgs}}"
   when: ansible_os_family == "RedHat"
