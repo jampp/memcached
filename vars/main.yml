@@ -4,7 +4,7 @@ env:
  RUNLEVEL: 1
 
 memcached_redhat_pkgs:
-  - libselinux-python
+  - "{{ (ansible_distribution_major_version == '2023') | ternary('python3-libselinux', 'libselinux-python') }}"
   - memcached
 
 memcached_ubuntu_pkgs:
